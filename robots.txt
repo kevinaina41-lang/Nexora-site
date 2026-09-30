@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nexora-site-44d834zl0-kevinaina41s-projects.vercel.app/https://nexora-site-44d834zl0-kevinaina41s-projects.vercel.app/sitemap.xml
+Sitemap: https://nexora-site-rosy.vercel.app/sitemap.xml
