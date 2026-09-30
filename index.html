@@ -13,7 +13,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <!-- HEADER -->
     <header id="header">
         <div class="container">
             <a href="index.html" class="logo">
@@ -33,24 +32,13 @@
         </div>
     </header>
 
-    <!-- HERO -->
     <section class="hero">
         <div class="container">
-            <div class="hero-badge reveal">
-                <span class="dot"></span>
-                <span>Disponible pour de nouveaux projets</span>
-            </div>
-            <h1 class="reveal">
-                Solutions <span class="gradient-text">intelligentes</span> pour votre entreprise
-            </h1>
-            <p class="reveal">
-                Chatbots IA, logiciels sur mesure et automatisation. Nous aidons les entreprises malgaches à gagner du temps et à vendre plus.
-            </p>
+            <div class="hero-badge reveal"><span class="dot"></span><span>Disponible pour de nouveaux projets</span></div>
+            <h1 class="reveal">Solutions <span class="gradient-text">intelligentes</span> pour votre entreprise</h1>
+            <p class="reveal">Chatbots IA, logiciels sur mesure et automatisation. Nous aidons les entreprises malgaches à gagner du temps et à vendre plus.</p>
             <div class="hero-buttons reveal">
-                <a href="#devis" class="btn-primary">
-                    Demander un devis
-                    <i data-lucide="arrow-right"></i>
-                </a>
+                <a href="#devis" class="btn-primary">Demander un devis <i data-lucide="arrow-right"></i></a>
                 <a href="#services" class="btn-secondary">Voir nos services</a>
             </div>
             <div class="hero-stats reveal">
@@ -61,7 +49,6 @@
         </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header reveal">
@@ -80,13 +67,9 @@
         </div>
     </section>
 
-    <!-- POURQUOI -->
     <section class="pourquoi">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Avantages</span>
-                <h2>Pourquoi nous choisir</h2>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Avantages</span><h2>Pourquoi nous choisir</h2></div>
             <div class="pourquoi-grid">
                 <div class="pourquoi-item reveal"><i data-lucide="badge-check"></i><h3>Prix compétitifs</h3><p>Des tarifs adaptés au marché malgache, à partir de 300 000 Ar.</p></div>
                 <div class="pourquoi-item reveal"><i data-lucide="zap"></i><h3>Livraison rapide</h3><p>Des projets livrés dans les délais promis.</p></div>
@@ -96,14 +79,9 @@
         </div>
     </section>
 
-    <!-- PORTFOLIO -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Réalisations</span>
-                <h2>Nos projets</h2>
-                <p class="section-sub">Quelques réalisations récentes</p>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Réalisations</span><h2>Nos projets</h2><p class="section-sub">Quelques réalisations récentes</p></div>
             <div class="portfolio-grid">
                 <div class="portfolio-card reveal"><div class="portfolio-icon"><i data-lucide="bot"></i></div><h3>Nexa AI</h3><p>Plateforme IA pour étudiants avec chat, quiz et génération de documents.</p></div>
                 <div class="portfolio-card reveal"><div class="portfolio-icon"><i data-lucide="hotel"></i></div><h3>Chatbot hôtel</h3><p>Assistant virtuel multilingue pour réservations 24h/24.</p></div>
@@ -112,13 +90,9 @@
         </div>
     </section>
 
-    <!-- À PROPOS -->
     <section id="apropos" class="apropos">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">À propos</span>
-                <h2>Notre mission</h2>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">À propos</span><h2>Notre mission</h2></div>
             <div class="apropos-content reveal">
                 <p>Nexora MDG est une entreprise malgache spécialisée dans les solutions d'intelligence artificielle et le développement de logiciels.</p>
                 <p>Notre mission est de rendre l'IA accessible à toutes les entreprises de Madagascar, quelle que soit leur taille.</p>
@@ -132,7 +106,6 @@
         </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta">
         <div class="container reveal">
             <h2>Prêt à démarrer ?</h2>
@@ -141,7 +114,7 @@
         </div>
     </section>
 
-    <!-- DEVIS -->
+    <!-- FORMULAIRE DEVIS -->
     <section id="devis" class="contact">
         <div class="container">
             <div class="section-header reveal">
@@ -150,7 +123,7 @@
                 <p class="section-sub">À partir de 300 000 Ar — remplissez le formulaire, réponse en 24h.</p>
             </div>
             
-            <form id="devis-form" onsubmit="envoyerDemande(event)" class="devis-form reveal" novalidate>
+            <form id="devis-form" onsubmit="return envoyerDemande(event)" class="devis-form reveal" novalidate>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Nom complet *</label>
@@ -197,6 +170,7 @@
                     <label>Décrivez votre projet *</label>
                     <textarea id="message" name="message" placeholder="Décrivez votre projet en quelques lignes..." required></textarea>
                 </div>
+                <div id="devis-message" style="margin-bottom:16px;font-size:14px;display:none;"></div>
                 <button type="submit" id="devis-submit" class="btn-primary">
                     <i data-lucide="send"></i>
                     Envoyer la demande
@@ -205,7 +179,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -251,10 +224,7 @@
         <div class="chat-header">
             <div class="chat-header-info">
                 <img src="logo.png" alt="Nexora">
-                <div>
-                    <strong>Assistant Nexora</strong>
-                    <span><span class="online-dot"></span>En ligne</span>
-                </div>
+                <div><strong>Assistant Nexora</strong><span><span class="online-dot"></span>En ligne</span></div>
             </div>
             <button onclick="toggleChat()" aria-label="Fermer"><i data-lucide="x"></i></button>
         </div>
@@ -271,31 +241,47 @@
 
     <!-- ============ SUPABASE — ENVOI DU FORMULAIRE ============ -->
     <script>
-        // ============ CONFIGURATION SUPABASE ============
+    (function () {
+        'use strict';
+
         const SUPABASE_URL = 'https://abocxlbfehhbpyuiqqfa.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFib2N4bGJmZWhoYnB5dWlxcWZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3Njk4MDksImV4cCI6MjEwNjM0NTgwOX0.Wkrvckzwk9n9Np3U2E_zzi4P6g37KZOoLB3u9A1u-KE';
 
-        // CORRECTION : on évite de redéclarer "supabase" (le CDN l'expose déjà en global)
-        const { createClient } = window.supabase;
-        const sbClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Vérification que la librairie est chargée
+        if (!window.supabase || !window.supabase.createClient) {
+            console.error('❌ Supabase n\'est pas chargé !');
+            alert('Erreur : la librairie Supabase n\'a pas pu être chargée. Vérifiez votre connexion internet.');
+            return;
+        }
 
-        // ============ ENVOI DU FORMULAIRE DE DEVIS ============
-        async function envoyerDemande(event) {
+        const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Fonction globale accessible depuis onsubmit
+        window.envoyerDemande = async function (event) {
             event.preventDefault();
             event.stopPropagation();
 
-            const form = event.target;
+            const form = document.getElementById('devis-form');
             const btn = document.getElementById('devis-submit');
-            const originalText = btn.innerHTML;
+            const msgEl = document.getElementById('devis-message');
 
-            // Vérification manuelle des champs
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return false;
+            // Vérification manuelle des champs requis
+            const required = ['nom', 'email', 'telephone', 'type_projet', 'type_paiement', 'message'];
+            for (const id of required) {
+                const el = document.getElementById(id);
+                if (!el || !el.value.trim()) {
+                    msgEl.style.display = 'block';
+                    msgEl.style.color = '#ef4444';
+                    msgEl.innerText = '⚠️ Veuillez remplir tous les champs obligatoires.';
+                    el && el.focus();
+                    return false;
+                }
             }
 
+            const originalText = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = 'Envoi en cours...';
+            msgEl.style.display = 'none';
 
             const demande = {
                 nom: document.getElementById('nom').value.trim(),
@@ -308,33 +294,52 @@
                 statut: 'nouveau'
             };
 
+            console.log('Envoi de la demande :', demande);
+
             try {
-                const { error } = await sbClient.from('demandes').insert(demande);
+                const { data, error } = await sbClient.from('demandes').insert(demande).select();
 
                 if (error) {
-                    console.error('Erreur Supabase:', error);
-                    alert('❌ Erreur lors de l\'envoi : ' + error.message);
+                    console.error('❌ Erreur Supabase :', error);
+                    msgEl.style.display = 'block';
+                    msgEl.style.color = '#ef4444';
+                    msgEl.innerText = '❌ Erreur : ' + error.message;
+                    alert('Erreur lors de l\'envoi : ' + error.message);
                     btn.disabled = false;
                     btn.innerHTML = originalText;
                     return false;
                 }
 
+                console.log('✅ Demande envoyée :', data);
+
+                msgEl.style.display = 'block';
+                msgEl.style.color = '#4ade80';
+                msgEl.innerText = '✅ Votre demande a été envoyée ! Nous vous répondrons sous 24h.';
                 alert('✅ Votre demande a été envoyée ! Nous vous répondrons sous 24h.');
+
                 form.reset();
-            } catch (e) {
-                console.error('Exception:', e);
-                alert('❌ Erreur inattendue : ' + e.message);
-            } finally {
                 btn.disabled = false;
                 btn.innerHTML = originalText;
                 if (window.lucide) lucide.createIcons();
+
+                // Masquer le message après 8 secondes
+                setTimeout(() => { msgEl.style.display = 'none'; }, 8000);
+
+            } catch (e) {
+                console.error('❌ Exception :', e);
+                msgEl.style.display = 'block';
+                msgEl.style.color = '#ef4444';
+                msgEl.innerText = '❌ Erreur inattendue : ' + e.message;
+                alert('Erreur inattendue : ' + e.message);
+                btn.disabled = false;
+                btn.innerHTML = originalText;
             }
 
             return false;
-        }
+        };
 
-        // Initialisation des icônes Lucide
         if (window.lucide) lucide.createIcons();
+    })();
     </script>
 </body>
 </html>
