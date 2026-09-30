@@ -7,15 +7,15 @@ function toggleMenu() {
         nav.style.display = 'flex';
         nav.style.flexDirection = 'column';
         nav.style.position = 'absolute';
-        nav.style.top = '70px';
+        nav.style.top = '75px';
         nav.style.right = '20px';
         nav.style.left = '20px';
-        nav.style.background = 'rgba(20,20,24,0.95)';
-        nav.style.backdropFilter = 'blur(20px)';
-        nav.style.padding = '20px';
-        nav.style.borderRadius = '16px';
+        nav.style.background = 'rgba(15,15,17,0.98)';
+        nav.style.backdropFilter = 'blur(30px)';
+        nav.style.padding = '24px';
+        nav.style.borderRadius = '20px';
         nav.style.border = '1px solid rgba(255,255,255,0.08)';
-        nav.style.gap = '16px';
+        nav.style.gap = '20px';
         nav.style.zIndex = '100';
     }
 }
@@ -34,7 +34,7 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -60,12 +60,10 @@ async function envoyerChat() {
     const message = input.value.trim();
     if (!message) return;
     
-    // Ajouter le message utilisateur
     body.innerHTML += `<div class="chat-message user">${message}</div>`;
     input.value = '';
     body.scrollTop = body.scrollHeight;
     
-    // Indicateur de chargement
     const loadingId = 'loading-' + Date.now();
     body.innerHTML += `
         <div class="chat-message bot" id="${loadingId}">
@@ -102,21 +100,19 @@ LANGUE (TRÈS IMPORTANT) :
 - English → réponds en anglais
 - Malagasy → réponds en malgache
 - 中文 → réponds en chinois
-- Español, Deutsch, Italiano, etc. → réponds dans cette langue
 - Détecte automatiquement la langue et réponds dedans
 
 TON RÔLE :
 - Répondre UNIQUEMENT aux questions sur les services de Nexora MDG
 - Convaincre le client avec des arguments pertinents et chiffrés
-- Toujours proposer de remplir le formulaire de devis pour un prix précis
+- Toujours proposer de remplir le formulaire de devis
 - Ne JAMAIS donner de prix fixes, seulement des estimations
-- Refuser poliment les questions hors sujet (maths, vie personnelle, actualités, etc.) en disant dans la langue de l'utilisateur : "Je suis uniquement là pour vous renseigner sur les services de Nexora MDG."
+- Refuser poliment les questions hors sujet
 
 FORMAT DE TES RÉPONSES :
-- Utilise le markdown : **gras**, listes avec -, tableaux avec |
+- Utilise le markdown : **gras**, listes, tableaux
 - Structure avec des titres (##)
 - Sois clair, concis, professionnel
-- Utilise des tableaux pour comparer
 
 ARGUMENTS DE CONVICTION :
 - Gain de temps : jusqu'à 10h/semaine
@@ -141,7 +137,7 @@ ARGUMENTS DE CONVICTION :
     } catch (e) {
         const loadingEl = document.getElementById(loadingId);
         if (loadingEl) {
-            loadingEl.innerText = "Désolé, une erreur est survenue. Contactez-nous directement par téléphone ou email.";
+            loadingEl.innerText = "Désolé, une erreur est survenue. Contactez-nous par téléphone ou email.";
         }
     }
     
