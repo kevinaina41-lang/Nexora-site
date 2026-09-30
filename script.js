@@ -1,81 +1,86 @@
-// MENU MOBILE
+// ============================================
+// NEXORA MDG — script.js
+// ============================================
+
+// ============ MENU MOBILE ============
 function toggleMenu() {
     const nav = document.getElementById('nav');
-    if (nav.style.display === 'flex') {
-        nav.style.display = '';
-    } else {
-        nav.style.display = 'flex';
-        nav.style.flexDirection = 'column';
-        nav.style.position = 'absolute';
-        nav.style.top = '75px';
-        nav.style.right = '20px';
-        nav.style.left = '20px';
-        nav.style.background = 'rgba(15,15,17,0.98)';
-        nav.style.backdropFilter = 'blur(30px)';
-        nav.style.padding = '24px';
-        nav.style.borderRadius = '20px';
-        nav.style.border = '1px solid rgba(255,255,255,0.08)';
-        nav.style.gap = '20px';
-        nav.style.zIndex = '100';
-    }
+    if (!nav) return;
+    nav.classList.toggle('open');
 }
 
-// HEADER SCROLL
+// Fermer le menu mobile au clic sur un lien
+document.addEventListener('click', function (e) {
+    const nav = document.getElementById('nav');
+    if (!nav) return;
+    if (e.target.closest('#nav a') && window.innerWidth <= 768) {
+        nav.classList.remove('open');
+    }
+});
+
+// ============ HEADER SCROLL ============
 window.addEventListener('scroll', () => {
     const header = document.getElementById('header');
+    if (!header) return;
     if (window.scrollY > 20) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
 });
 
-// ANIMATIONS AU SCROLL
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+// ============ ANIMATIONS AU SCROLL ============
+if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+} else {
+    // Fallback : tout afficher direct
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+}
 
-// CHAT — OUVRIR / FERMER
+// ============ CHAT ============
 function toggleChat() {
     const widget = document.getElementById('chat-widget');
     if (!widget) return;
     widget.classList.toggle('show');
-    if (widget.classList.contains('show')) {
-        setTimeout(() => {
-            const input = document.getElementById('chat-input');
-            if (input) input.focus();
-        }, 300);
-    }
 }
 
-// ENVOYER MESSAGE CHAT
+// Protection XSS : échappe le HTML avant insertion
+function escapeHTML(str) {
+    return String(str ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+}
+
+// ============ ENVOYER MESSAGE CHAT ============
 async function envoyerChat() {
     const input = document.getElementById('chat-input');
     const body = document.getElementById('chat-body');
     if (!input || !body) return;
-    
+
     const message = input.value.trim();
     if (!message) return;
-    
-    body.innerHTML += `<div class="chat-message user">${message}</div>`;
+
+    // Ajouter le message utilisateur (échappé)
+    body.innerHTML += `<div class="chat-message user">${escapeHTML(message)}</div>`;
     input.value = '';
     body.scrollTop = body.scrollHeight;
-    
+
+    // Indicateur de chargement
     const loadingId = 'loading-' + Date.now();
     body.innerHTML += `
         <div class="chat-message bot" id="${loadingId}">
             <div class="typing-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
         </div>
     `;
     body.scrollTop = body.scrollHeight;
-    
+
     try {
         const response = await fetch('https://nexa-ia-pjza.onrender.com/chat', {
             method: 'POST',
@@ -100,17 +105,17 @@ LANGUE (TRÈS IMPORTANT) :
 - English → réponds en anglais
 - Malagasy → réponds en malgache
 - 中文 → réponds en chinois
-- Détecte automatiquement la langue et réponds dedans
+- Español, Deutsch, Italiano, etc. → réponds dans cette langue
 
 TON RÔLE :
 - Répondre UNIQUEMENT aux questions sur les services de Nexora MDG
 - Convaincre le client avec des arguments pertinents et chiffrés
-- Toujours proposer de remplir le formulaire de devis
+- Toujours proposer de remplir le formulaire de devis pour un prix précis
 - Ne JAMAIS donner de prix fixes, seulement des estimations
 - Refuser poliment les questions hors sujet
 
-FORMAT DE TES RÉPONSES :
-- Utilise le markdown : **gras**, listes, tableaux
+FORMAT :
+- Utilise le markdown : **gras**, listes avec -, tableaux avec |
 - Structure avec des titres (##)
 - Sois clair, concis, professionnel
 
@@ -121,40 +126,53 @@ ARGUMENTS DE CONVICTION :
 - Prix adaptés : à partir de 300 000 Ar
 - Garantie 30 jours
 - 2 révisions gratuites
-- Support 24/7`
+- Support 24/7
+
+Remplissez notre formulaire de devis pour un prix précis !`
             })
         });
+
+        if (!response.ok) {
+            throw new Error('Erreur HTTP ' + response.status);
+        }
+
         const data = await response.json();
-        
         const loadingEl = document.getElementById(loadingId);
-        if (loadingEl) {
-            if (typeof marked !== 'undefined') {
-                loadingEl.innerHTML = marked.parse(data.reply);
-            } else {
-                loadingEl.innerText = data.reply;
-            }
+        if (!loadingEl) return;
+
+        const reply = data.reply || data.message || 'Désolé, je n\'ai pas de réponse.';
+
+        if (typeof marked !== 'undefined' && marked.parse) {
+            // marked.parse produit du HTML → on l'insère tel quel
+            loadingEl.innerHTML = marked.parse(reply);
+        } else {
+            loadingEl.textContent = reply;
         }
     } catch (e) {
+        console.error('Erreur chat:', e);
         const loadingEl = document.getElementById(loadingId);
         if (loadingEl) {
-            loadingEl.innerText = "Désolé, une erreur est survenue. Contactez-nous par téléphone ou email.";
+            loadingEl.textContent = "Désolé, une erreur est survenue. Contactez-nous directement par téléphone ou email.";
         }
     }
-    
+
     body.scrollTop = body.scrollHeight;
 }
 
-// SCROLL FLUIDE
+// ============ SCROLL FLUIDE ============
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         if (href === '#') return;
-        e.preventDefault();
         const target = document.querySelector(href);
         if (target) {
+            e.preventDefault();
             target.scrollIntoView({ behavior: 'smooth' });
             const nav = document.getElementById('nav');
-            if (window.innerWidth <= 768) nav.style.display = '';
+            if (window.innerWidth <= 768 && nav) nav.classList.remove('open');
         }
     });
 });
+
+// ============ INITIALISATION DES ICÔNES ============
+if (window.lucide) lucide.createIcons();
