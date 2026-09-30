@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nexora MDG — Solutions IA & Logiciels</title>
+    <meta name="description" content="Nexora MDG crée des chatbots, logiciels et automatisations pour les entreprises malgaches.">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Nexora MDG">
+                <span>Nexora MDG</span>
+            </a>
+            <nav id="nav">
+                <a href="#services">Services</a>
+                <a href="#portfolio">Réalisations</a>
+                <a href="#apropos">À propos</a>
+                <a href="regles.html">CGV</a>
+                <a href="#devis" class="btn-nav">Devis gratuit</a>
+            </nav>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge reveal">
+                <span class="dot"></span>
+                <span>Disponible pour de nouveaux projets</span>
+            </div>
+            <h1 class="reveal">
+                Solutions <span class="gradient-text">intelligentes</span> pour votre entreprise
+            </h1>
+            <p class="reveal">
+                Chatbots IA, logiciels sur mesure et automatisation. Nous aidons les entreprises malgaches à gagner du temps et à vendre plus.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#devis" class="btn-primary">
+                    Demander un devis
+                    <i data-lucide="arrow-right"></i>
+                </a>
+                <a href="#services" class="btn-secondary">Voir nos services</a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="stat">
+                    <span class="stat-value">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">30j</span>
+                    <span class="stat-label">Garantie</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Malagasy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Services</span>
+                <h2>Ce que nous faisons</h2>
+                <p class="section-sub">Des solutions concrètes pour votre entreprise</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i data-lucide="bot"></i></div>
+                    <h3>Chatbot IA</h3>
+                    <p>Répond à vos clients 24h/24, prend les réservations et commandes automatiquement.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i data-lucide="code-2"></i></div>
+                    <h3>Développement logiciel</h3>
+                    <p>Applications web, mobiles et logiciels de gestion sur mesure.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i data-lucide="globe"></i></div>
+                    <h3>Création de sites</h3>
+                    <p>Sites vitrines, e-commerce et portails modernes et rapides.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i data-lucide="settings"></i></div>
+                    <h3>Automatisation</h3>
+                    <p>Automatisez vos tâches répétitives et gagnez des heures chaque jour.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i data-lucide="graduation-cap"></i></div>
+                    <h3>Formation IA</h3>
+                    <p>Formez vos équipes à l'utilisation de l'intelligence artificielle.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i data-lucide="briefcase"></i></div>
+                    <h3>Conseil</h3>
+                    <p>Accompagnement dans votre transformation digitale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POURQUOI -->
+    <section class="pourquoi">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Avantages</span>
+                <h2>Pourquoi nous choisir</h2>
+            </div>
+            <div class="pourquoi-grid">
+                <div class="pourquoi-item reveal">
+                    <i data-lucide="badge-check"></i>
+                    <h3>Prix compétitifs</h3>
+                    <p>Des tarifs adaptés au marché malgache, à partir de 300 000 Ar.</p>
+                </div>
+                <div class="pourquoi-item reveal">
+                    <i data-lucide="zap"></i>
+                    <h3>Livraison rapide</h3>
+                    <p>Des projets livrés dans les délais promis.</p>
+                </div>
+                <div class="pourquoi-item reveal">
+                    <i data-lucide="headphones"></i>
+                    <h3>Support 24/7</h3>
+                    <p>Une équipe disponible à tout moment.</p>
+                </div>
+                <div class="pourquoi-item reveal">
+                    <i data-lucide="map-pin"></i>
+                    <h3>100% Malagasy</h3>
+                    <p>Une entreprise locale, proche de vous.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Réalisations</span>
+                <h2>Nos projets</h2>
+                <p class="section-sub">Quelques réalisations récentes</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-icon"><i data-lucide="bot"></i></div>
+                    <h3>Nexa AI</h3>
+                    <p>Plateforme IA pour étudiants avec chat, quiz et génération de documents.</p>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-icon"><i data-lucide="hotel"></i></div>
+                    <h3>Chatbot hôtel</h3>
+                    <p>Assistant virtuel multilingue pour réservations 24h/24.</p>
+                </div>
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-icon"><i data-lucide="shopping-cart"></i></div>
+                    <h3>Automatisation e-commerce</h3>
+                    <p>Gestion automatisée des commandes et des stocks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="apropos" class="apropos">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">À propos</span>
+                <h2>Notre mission</h2>
+            </div>
+            <div class="apropos-content reveal">
+                <p>Nexora MDG est une entreprise malgache spécialisée dans les solutions d'intelligence artificielle et le développement de logiciels.</p>
+                <p>Notre mission est de rendre l'IA accessible à toutes les entreprises de Madagascar, quelle que soit leur taille.</p>
+                <div class="apropos-points">
+                    <div class="point"><i data-lucide="check"></i><span>Solutions sur mesure</span></div>
+                    <div class="point"><i data-lucide="check"></i><span>Accompagnement personnalisé</span></div>
+                    <div class="point"><i data-lucide="check"></i><span>Technologies modernes</span></div>
+                    <div class="point"><i data-lucide="check"></i><span>Support réactif</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container reveal">
+            <h2>Prêt à démarrer ?</h2>
+            <p>Devis gratuit et sans engagement. Réponse en moins de 24h.</p>
+            <a href="#devis" class="btn-primary">
+                Demander un devis
+                <i data-lucide="arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- DEVIS -->
+    <section id="devis" class="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Devis</span>
+                <h2>Demander un devis</h2>
+                <p class="section-sub">À partir de 300 000 Ar — remplissez le formulaire, réponse en 24h.</p>
+            </div>
+            
+            <form action="https://formspree.io/f/VOTRE_ID" method="POST" class="devis-form reveal">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nom complet *</label>
+                        <input type="text" name="nom" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" placeholder="votre@email.com" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Téléphone *</label>
+                        <input type="tel" name="telephone" placeholder="034 XX XXX XX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Type de projet *</label>
+                        <select name="type_projet" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="chatbot">Chatbot IA</option>
+                            <option value="logiciel">Développement logiciel</option>
+                            <option value="site">Création de site</option>
+                            <option value="automatisation">Automatisation</option>
+                            <option value="formation">Formation</option>
+                            <option value="conseil">Conseil</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Type de paiement *</label>
+                        <select name="type_paiement" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="unique">Paiement unique</option>
+                            <option value="maintenance">Avec maintenance mensuelle</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Budget estimé (Ar)</label>
+                        <input type="text" name="budget" placeholder="Ex: 500 000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Décrivez votre projet *</label>
+                    <textarea name="message" placeholder="Décrivez votre projet en quelques lignes..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i data-lucide="send"></i>
+                    Envoyer la demande
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="Nexora MDG">
+                        <span>Nexora MDG</span>
+                    </div>
+                    <p>Solutions IA et logiciels pour entreprises malgaches.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="#services">Services</a>
+                    <a href="#portfolio">Réalisations</a>
+                    <a href="#apropos">À propos</a>
+                    <a href="#devis">Devis</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Légal</h4>
+                    <a href="regles.html">Conditions générales</a>
+                    <a href="mentions.html">Mentions légales</a>
+                    <a href="confidentialite.html">Confidentialité</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="tel:+261XXXXXXXXX"><i data-lucide="phone"></i> [votre numéro]</a>
+                    <a href="mailto:nexora.contact@gmail.com"><i data-lucide="mail"></i> nexora.contact@gmail.com</a>
+                    <a href="#"><i data-lucide="map-pin"></i> Antananarivo, Madagascar</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Nexora MDG. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHAT -->
+    <button class="chat-toggle" onclick="toggleChat()" aria-label="Chat">
+        <img src="logo.png" alt="Chat">
+        <span class="chat-pulse"></span>
+    </button>
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <img src="logo.png" alt="Nexora">
+                <div>
+                    <strong>Assistant Nexora</strong>
+                    <span><span class="online-dot"></span>En ligne</span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" aria-label="Fermer"><i data-lucide="x"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="chat-message bot">Bonjour. Je suis l'assistant Nexora. Comment puis-je vous aider ?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Votre message..." onkeypress="if(event.key==='Enter') envoyerChat()">
+            <button onclick="envoyerChat()" aria-label="Envoyer"><i data-lucide="send"></i></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
