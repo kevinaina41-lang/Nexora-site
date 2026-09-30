@@ -2,17 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Nexora MDG — Solutions IA & Logiciels</title>
-    <meta name="description" content="Nexora MDG crée des chatbots IA, logiciels sur mesure et automatisations pour les entreprises malgaches. À partir de 300 000 Ar.">
+    <meta name="description" content="Nexora MDG crée des chatbots, logiciels et automatisations pour les entreprises malgaches.">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -43,24 +41,17 @@
                 <span>Disponible pour de nouveaux projets</span>
             </div>
             <h1 class="reveal">
-                <span class="gradient-text">Nexora</span> développe vos solutions digitales
+                Solutions <span class="gradient-text">intelligentes</span> pour votre entreprise
             </h1>
             <p class="reveal">
-                Sites web, applications et logiciels sur mesure pour moderniser votre activité, gagner en efficacité et créer de nouvelles opportunités.
+                Chatbots IA, logiciels sur mesure et automatisation. Nous aidons les entreprises malgaches à gagner du temps et à vendre plus.
             </p>
-            <div class="hero-tags reveal">
-                <span>Sites web</span>
-                <span class="sep">•</span>
-                <span>Applications</span>
-                <span class="sep">•</span>
-                <span>Logiciels IA</span>
-            </div>
             <div class="hero-buttons reveal">
                 <a href="#devis" class="btn-primary">
-                    Lancer mon projet
+                    Demander un devis
                     <i data-lucide="arrow-right"></i>
                 </a>
-                <a href="#services" class="btn-secondary">Découvrir nos offres</a>
+                <a href="#services" class="btn-secondary">Voir nos services</a>
             </div>
             <div class="hero-stats reveal">
                 <div class="stat">
@@ -223,25 +214,25 @@
                 <p class="section-sub">À partir de 300 000 Ar — remplissez le formulaire, réponse en 24h.</p>
             </div>
             
-            <form action="https://formspree.io/f/VOTRE_ID" method="POST" class="devis-form reveal">
+            <form onsubmit="envoyerDemande(event)" class="devis-form reveal">
                 <div class="form-row">
                     <div class="form-group">
                         <label>Nom complet *</label>
-                        <input type="text" name="nom" placeholder="Votre nom" required>
+                        <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
                     </div>
                     <div class="form-group">
                         <label>Email *</label>
-                        <input type="email" name="email" placeholder="votre@email.com" required>
+                        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Téléphone *</label>
-                        <input type="tel" name="telephone" placeholder="034 XX XXX XX" required>
+                        <input type="tel" id="telephone" name="telephone" placeholder="034 XX XXX XX" required>
                     </div>
                     <div class="form-group">
                         <label>Type de projet *</label>
-                        <select name="type_projet" required>
+                        <select id="type_projet" name="type_projet" required>
                             <option value="">Sélectionnez...</option>
                             <option value="chatbot">Chatbot IA</option>
                             <option value="logiciel">Développement logiciel</option>
@@ -255,7 +246,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Type de paiement *</label>
-                        <select name="type_paiement" required>
+                        <select id="type_paiement" name="type_paiement" required>
                             <option value="">Sélectionnez...</option>
                             <option value="unique">Paiement unique</option>
                             <option value="maintenance">Avec maintenance mensuelle</option>
@@ -263,12 +254,12 @@
                     </div>
                     <div class="form-group">
                         <label>Budget estimé (Ar)</label>
-                        <input type="text" name="budget" placeholder="Ex: 500 000">
+                        <input type="text" id="budget" name="budget" placeholder="Ex: 500 000">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Décrivez votre projet *</label>
-                    <textarea name="message" placeholder="Décrivez votre projet en quelques lignes..." required></textarea>
+                    <textarea id="message" name="message" placeholder="Décrivez votre projet en quelques lignes..." required></textarea>
                 </div>
                 <button type="submit" class="btn-primary">
                     <i data-lucide="send"></i>
@@ -346,6 +337,51 @@
     </div>
 
     <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
+
+    <!-- ============ SUPABASE — ENVOI DU FORMULAIRE ============ -->
+    <script>
+        // ⚠️ REMPLACEZ PAR VOTRE VRAIE CLÉ (la même que dans admin.html)
+        const SUPABASE_URL = 'https://abocxlbfehhbpyuiqqfa.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFib2N4bGJmZWhoYnB5dWlxcWZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3Njk4MDksImV4cCI6MjEwNjM0NTgwOX0.Wkrvckzwk9n9Np3U2E_zzi4P6g37KZOoLB3u9A1u-KE';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function envoyerDemande(event) {
+            event.preventDefault();
+
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = 'Envoi en cours...';
+
+            const demande = {
+                nom: document.getElementById('nom').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telephone: document.getElementById('telephone').value.trim(),
+                type_projet: document.getElementById('type_projet').value,
+                type_paiement: document.getElementById('type_paiement').value,
+                budget: document.getElementById('budget').value.trim() || null,
+                message: document.getElementById('message').value.trim(),
+                statut: 'nouveau'
+            };
+
+            const { error } = await supabase.from('demandes').insert(demande);
+
+            if (error) {
+                console.error('Erreur Supabase:', error);
+                alert('❌ Erreur lors de l\'envoi : ' + error.message);
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            alert('✅ Votre demande a été envoyée ! Nous vous répondrons sous 24h.');
+            event.target.reset();
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+
+        lucide.createIcons();
+    </script>
 </body>
 </html>
