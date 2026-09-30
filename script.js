@@ -38,16 +38,25 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// CHAT
+// CHAT — OUVRIR / FERMER
 function toggleChat() {
     const widget = document.getElementById('chat-widget');
+    if (!widget) return;
     widget.classList.toggle('show');
+    if (widget.classList.contains('show')) {
+        setTimeout(() => {
+            const input = document.getElementById('chat-input');
+            if (input) input.focus();
+        }, 300);
+    }
 }
 
 // ENVOYER MESSAGE CHAT
 async function envoyerChat() {
     const input = document.getElementById('chat-input');
     const body = document.getElementById('chat-body');
+    if (!input || !body) return;
+    
     const message = input.value.trim();
     if (!message) return;
     
@@ -56,7 +65,7 @@ async function envoyerChat() {
     input.value = '';
     body.scrollTop = body.scrollHeight;
     
-    // Indicateur de chargement (3 points animés)
+    // Indicateur de chargement
     const loadingId = 'loading-' + Date.now();
     body.innerHTML += `
         <div class="chat-message bot" id="${loadingId}">
@@ -116,33 +125,11 @@ ARGUMENTS DE CONVICTION :
 - Prix adaptés : à partir de 300 000 Ar
 - Garantie 30 jours
 - 2 révisions gratuites
-- Support 24/7
-
-EXEMPLE DE RÉPONSE POUR "Combien coûte un chatbot ?" :
-
-## Nos tarifs
-
-Nos prix sont adaptés au marché malgache, **à partir de 300 000 Ar**.
-
-| Type de chatbot | Prix estimé | Délai |
-|---|---|---|
-| Chatbot simple | 300 000 - 500 000 Ar | 1 semaine |
-| Chatbot avancé | 500 000 - 1 000 000 Ar | 2 semaines |
-| Chatbot + site | 1 000 000 - 2 000 000 Ar | 3 semaines |
-
-**Pourquoi nous choisir ?**
-- Réponses 24h/24
-- Gain de temps : **10h/semaine**
-- Augmentation des ventes : **+30%**
-- Garantie 30 jours
-- 2 révisions gratuites
-
-Remplissez notre **formulaire de devis** pour un prix précis !`
+- Support 24/7`
             })
         });
         const data = await response.json();
         
-        // Afficher en HTML (markdown rendu)
         const loadingEl = document.getElementById(loadingId);
         if (loadingEl) {
             if (typeof marked !== 'undefined') {
