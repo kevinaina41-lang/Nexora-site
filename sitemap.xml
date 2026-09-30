@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://nexora-site.vercel.app/</loc>
+        <loc>https:https://nexora-site-44d834zl0-kevinaina41s-projects.vercel.app/</loc>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://nexora-site.vercel.app/regles.html</loc>
+        <loc>https:https://nexora-site-44d834zl0-kevinaina41s-projects.vercel.app/regles.html</loc>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://nexora-site.vercel.app/mentions.html</loc>
+        <loc>https://nexora-site-44d834zl0-kevinaina41s-projects.vercel.app/mentions.html</loc>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://nexora-site.vercel.app/confidentialite.html</loc>
+        <loc>https://nexora-site-44d834zl0-kevinaina41s-projects.vercel.app/confidentialite.html</loc>
         <priority>0.3</priority>
     </url>
 </urlset>
