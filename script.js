@@ -9,7 +9,6 @@ function toggleMenu() {
     nav.classList.toggle('open');
 }
 
-// Fermer le menu mobile au clic sur un lien
 document.addEventListener('click', function (e) {
     const nav = document.getElementById('nav');
     if (!nav) return;
@@ -30,15 +29,11 @@ window.addEventListener('scroll', () => {
 if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 } else {
-    // Fallback : tout afficher direct
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 }
 
@@ -49,14 +44,12 @@ function toggleChat() {
     widget.classList.toggle('show');
 }
 
-// Protection XSS : échappe le HTML avant insertion
 function escapeHTML(str) {
     return String(str ?? '').replace(/[&<>"']/g, c => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[c]));
 }
 
-// ============ ENVOYER MESSAGE CHAT ============
 async function envoyerChat() {
     const input = document.getElementById('chat-input');
     const body = document.getElementById('chat-body');
@@ -65,18 +58,14 @@ async function envoyerChat() {
     const message = input.value.trim();
     if (!message) return;
 
-    // Ajouter le message utilisateur (échappé)
     body.innerHTML += `<div class="chat-message user">${escapeHTML(message)}</div>`;
     input.value = '';
     body.scrollTop = body.scrollHeight;
 
-    // Indicateur de chargement
     const loadingId = 'loading-' + Date.now();
     body.innerHTML += `
         <div class="chat-message bot" id="${loadingId}">
-            <div class="typing-indicator">
-                <span></span><span></span><span></span>
-            </div>
+            <div class="typing-indicator"><span></span><span></span><span></span></div>
         </div>
     `;
     body.scrollTop = body.scrollHeight;
@@ -99,42 +88,26 @@ NOS SERVICES :
 - Conseil en transformation digitale
 - Maintenance et support technique
 
-LANGUE (TRÈS IMPORTANT) :
-- Réponds TOUJOURS dans la même langue que l'utilisateur
-- Français → réponds en français
-- English → réponds en anglais
-- Malagasy → réponds en malgache
-- 中文 → réponds en chinois
-- Español, Deutsch, Italiano, etc. → réponds dans cette langue
+LANGUE : Réponds TOUJOURS dans la même langue que l'utilisateur.
 
 TON RÔLE :
 - Répondre UNIQUEMENT aux questions sur les services de Nexora MDG
-- Convaincre le client avec des arguments pertinents et chiffrés
-- Toujours proposer de remplir le formulaire de devis pour un prix précis
-- Ne JAMAIS donner de prix fixes, seulement des estimations
+- Convaincre le client avec des arguments chiffrés
+- Toujours proposer le formulaire de devis
 - Refuser poliment les questions hors sujet
 
-FORMAT :
-- Utilise le markdown : **gras**, listes avec -, tableaux avec |
-- Structure avec des titres (##)
-- Sois clair, concis, professionnel
+FORMAT : Utilise le markdown.
 
-ARGUMENTS DE CONVICTION :
-- Gain de temps : jusqu'à 10h/semaine
-- Augmentation des ventes : +30%
-- Satisfaction client : réponses 24h/24
-- Prix adaptés : à partir de 300 000 Ar
+ARGUMENTS :
+- Gain de temps : 10h/semaine
+- +30% de ventes
+- Prix à partir de 300 000 Ar
 - Garantie 30 jours
-- 2 révisions gratuites
-- Support 24/7
-
-Remplissez notre formulaire de devis pour un prix précis !`
+- Support 24/7`
             })
         });
 
-        if (!response.ok) {
-            throw new Error('Erreur HTTP ' + response.status);
-        }
+        if (!response.ok) throw new Error('Erreur HTTP ' + response.status);
 
         const data = await response.json();
         const loadingEl = document.getElementById(loadingId);
@@ -143,7 +116,6 @@ Remplissez notre formulaire de devis pour un prix précis !`
         const reply = data.reply || data.message || 'Désolé, je n\'ai pas de réponse.';
 
         if (typeof marked !== 'undefined' && marked.parse) {
-            // marked.parse produit du HTML → on l'insère tel quel
             loadingEl.innerHTML = marked.parse(reply);
         } else {
             loadingEl.textContent = reply;
@@ -151,11 +123,8 @@ Remplissez notre formulaire de devis pour un prix précis !`
     } catch (e) {
         console.error('Erreur chat:', e);
         const loadingEl = document.getElementById(loadingId);
-        if (loadingEl) {
-            loadingEl.textContent = "Désolé, une erreur est survenue. Contactez-nous directement par téléphone ou email.";
-        }
+        if (loadingEl) loadingEl.textContent = "Désolé, une erreur est survenue. Contactez-nous par téléphone ou email.";
     }
-
     body.scrollTop = body.scrollHeight;
 }
 
@@ -174,5 +143,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ============ INITIALISATION DES ICÔNES ============
+// ============ INIT ICÔNES ============
 if (window.lucide) lucide.createIcons();
